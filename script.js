@@ -5,6 +5,23 @@ const navMenu = document.getElementById('nav-menu');
 const contactForm = document.getElementById('contact-form');
 const modal = document.getElementById('success-modal');
 
+// ===== EmailJS Configuration =====
+// Diese Konfiguration müssen Sie bei EmailJS einrichten:
+// 1. Registrieren Sie sich unter https://www.emailjs.com/
+// 2. Erstellen Sie einen Email Service (z.B. mit Gmail)
+// 3. Erstellen Sie ein Email Template
+// 4. Ersetzen Sie die Werte unten mit Ihren Daten
+const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'zSCwx-IuiDsgmZ8Dz', // Hier Ihre Public Key von EmailJS eintragen
+    SERVICE_ID: 'service_58md0n9', // Hier Ihre Service ID eintragen
+    TEMPLATE_ID: 'template_4jvlajo' // Hier Ihre Template ID eintragen
+};
+
+// Initialize EmailJS
+(function() {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+})();
+
 // ===== Navbar Scroll Effect =====
 let lastScroll = 0;
 
@@ -136,15 +153,62 @@ if (contactForm) {
             return;
         }
         
-        // Show loading state
         const submitBtn = contactForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.innerHTML = '<span>Wird gesendet...</span>';
         submitBtn.disabled = true;
         
-        // Save to localStorage for admin dashboard
         try {
-            const contactRequest = {
+            // Send email via EmailJS
+            const emailParams = {
+                from_name: data.name,
+                from_email: data.email,
+                from_phone: data.phone,
+                from_company: data.company || 'Keine Angabe',
+                message: data.message || 'Keine Nachricht hinterlassen',
+                timestamp: new Date().toLocaleString('de-DE')
+            };
+            
+            const response = await emailjs.send(
+                EMAILJS_CONFIG.SERVICE_ID,
+                EMAILJS_CONFIG.TEMPLATE_ID,
+                emailParams
+            );
+            
+            if (response.status === 200) {
+                // Show success modal
+                if (modal) {
+                    modal.classList.add('active');
+                }
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Save to localStorage for admin dashboard
+                const requests = JSON.parse(localStorage.getItem('contactRequests') || '[]');
+                requests.push({
+                    id: 'req-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+                    name: data.name,
+                    company: data.company || '',
+                    email: data.email,
+                    phone: data.phone,
+                    message: data.message || '',
+                    timestamp: new Date().toISOString(),
+                    status: 'neu',
+                    emailSent: true
+                });
+                localStorage.setItem('contactRequests', JSON.stringify(requests));
+                
+            } else {
+                throw new Error('Email konnte nicht gesendet werden');
+            }
+            
+        } catch (error) {
+            console.error('Fehler beim Email-Versand:', error);
+            
+            // Fallback: Nur lokal speichern wenn Email fehlschlägt
+            const requests = JSON.parse(localStorage.getItem('contactRequests') || '[]');
+            requests.push({
                 id: 'req-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
                 name: data.name,
                 company: data.company || '',
@@ -152,25 +216,14 @@ if (contactForm) {
                 phone: data.phone,
                 message: data.message || '',
                 timestamp: new Date().toISOString(),
-                status: 'new'
-            };
+                status: 'neu',
+                emailSent: false,
+                error: error.message
+            });
+            localStorage.setItem('contactRequests', JSON.stringify(requests));
             
-            // Get existing requests
-            const existingRequests = JSON.parse(localStorage.getItem('contactRequests')) || [];
-            existingRequests.push(contactRequest);
-            localStorage.setItem('contactRequests', JSON.stringify(existingRequests));
-            
-            // Simulate small delay for UX
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Show success modal
-            if (modal) {
-                modal.classList.add('active');
-            }
-            contactForm.reset();
-            
-        } catch (error) {
-            alert('Es gab ein Problem beim Senden. Bitte versuchen Sie es erneut.');
+            // Zeige Fehlermeldung aber speichere trotzdem
+            alert('Ihre Anfrage wurde gespeichert, aber es gab ein Problem beim Email-Versand. Wir melden uns trotzdem bei Ihnen!');
         } finally {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
