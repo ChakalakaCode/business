@@ -225,7 +225,128 @@
     text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
 }
 
-/* Colorful testimonials */
+/* CTA Section with bild2.png */
+.cta-section {
+    position: relative;
+    padding: var(--space-24) 0;
+    overflow: hidden;
+    background: 
+        linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.9) 25%, rgba(4, 120, 87, 0.95) 50%, rgba(34, 211, 238, 0.9) 75%, rgba(6, 182, 212, 0.95) 100%),
+        url('bild2.png') center/cover;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--mesh-gradient);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    color: #ffffff;
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-6);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.cta-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.cta-section .btn-white {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    color: var(--gray-900);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 10px 15px -3px rgba(0, 0, 0, 0.2),
+        0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    font-weight: var(--font-semibold);
+}
+
+.cta-section .btn-white:hover {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 8px 10px -6px rgba(0, 0, 0, 0.2);
+}
+
+/* FAQ Section with bild1.png */
+.faq-section {
+    position: relative;
+    padding: var(--space-24) 0;
+    overflow: hidden;
+    background: 
+        linear-gradient(135deg, rgba(245, 158, 11, 0.9) 0%, rgba(251, 191, 36, 0.8) 25%, rgba(252, 211, 77, 0.9) 50%, rgba(245, 158, 11, 0.8) 75%, rgba(217, 119, 6, 0.9) 100%),
+        url('bild1.png') center/cover;
+}
+
+.faq-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--mesh-gradient);
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.faq-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.faq-content h2 {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-4);
+    overflow: hidden;
+}
+
+.faq-question {
+    color: #ffffff;
+    font-weight: var(--font-semibold);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.faq-answer {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.faq-answer strong {
+    color: #fbbf24;
+    font-weight: var(--font-bold);
+}
 .testimonial-content {
     background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(34, 211, 238, 0.05) 100%);
     border-left: 4px solid #fbbf24;
