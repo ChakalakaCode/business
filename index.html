@@ -11,6 +11,9 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
+    <!-- Advanced Animations -->
+    <script src="advanced_animations.js"></script>
+    
     <!-- SEO Meta Tags -->
     <title>Website erstellen lassen | Professionelle Homepage ab 350€ ✓ Festpreis</title>
     <meta name="description" content="Website erstellen lassen ✓ Professionelle Homepage & Webseiten zum Festpreis ab 350€ ✓ SEO-Optimierung ✓ Hosting inklusive ✓ Webdesign Agentur mit Rundum-Service. Jetzt kostenlos beraten lassen!">
@@ -37,6 +40,7 @@
     
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="psychological_elements.css">
+    <link rel="stylesheet" href="professional_design.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
     
     <!-- Google Fonts -->
@@ -244,11 +248,11 @@
     <main id="main">
 
     <!-- Hero Section -->
-    <header class="hero" id="home">
+    <header class="hero hero-professional" id="home">
         <div class="hero-bg">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
+            <div class="gradient-orb gradient-orb-professional orb-1"></div>
+            <div class="gradient-orb gradient-orb-professional orb-2"></div>
+            <div class="gradient-orb gradient-orb-professional orb-3"></div>
             <div class="grid-overlay"></div>
         </div>
         <div class="hero-content">
@@ -256,17 +260,17 @@
                 <span class="badge-icon">🔥</span>
                 <span class="badge-text">NUR HEUTE: Kostenlose SEO-Analyse (Wert: 197€)</span>
             </div>
-            <h1 class="hero-title animate-fade-in-up">
+            <h1 class="hero-title animate-fade-in-up heading-professional">
                 <span class="title-line">Ihre Website bringt</span>
-                <span class="title-highlight">endlich Kunden</span>
+                <span class="title-highlight gradient-text">endlich Kunden</span>
             </h1>
-            <p class="hero-subtitle animate-fade-in-up delay-1">
+            <p class="hero-subtitle animate-fade-in-up delay-1 text-professional">
                 <strong>87% unserer Kunden</strong> melden eine spürbare Umsatzsteigerung innerhalb der ersten 3 Monate. 
                 Professionelle Webseiten erstellen lassen die bei Google ranken und verkaufen. 
                 <strong>Festpreis ab 350€</strong> – ohne versteckte Kosten.
             </p>
             <div class="hero-cta animate-fade-in-up delay-2">
-                <a href="#kontakt" class="btn btn-primary btn-large">
+                <a href="#kontakt" class="btn btn-primary btn-large btn-professional btn-professional-primary">
                     <span>🎯 Jetzt kostenlose Analyse anfordern</span>
                     <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -304,7 +308,7 @@
     </header>
 
     <!-- Trust Logos -->
-    <section class="trust-section">
+    <section class="trust-section section-professional">
         <div class="container">
             <div class="trust-header">
                 <p class="trust-text">Vertrauen von Unternehmen in ganz Deutschland</p>
@@ -822,7 +826,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact-section" id="kontakt">
+    <section class="contact-section section-professional" id="kontakt">
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info animate-on-scroll">
@@ -865,7 +869,7 @@
                         <span>- Sabine M., Coaching-Business</span>
                     </div>
                 </div>
-                <form class="contact-form animate-on-scroll" id="contact-form">
+                <form class="contact-form animate-on-scroll form-professional" id="contact-form">
                     <div class="form-header">
                         <div class="form-badge">
                             <span>⚡ Schnelle Anmeldung - nur 30 Sekunden</span>
@@ -873,28 +877,28 @@
                         <h3>Sichern Sie sich Ihre kostenlose Analyse</h3>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required placeholder="Ihr vollständiger Name">
+                        <div class="form-group form-group-professional">
+                            <label for="name" class="form-label-professional">Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Ihr vollständiger Name" class="form-input-professional">
                         </div>
-                        <div class="form-group">
-                            <label for="company">Unternehmen</label>
-                            <input type="text" id="company" name="company" placeholder="Name Ihres Unternehmens">
+                        <div class="form-group form-group-professional">
+                            <label for="company" class="form-label-professional">Unternehmen</label>
+                            <input type="text" id="company" name="company" placeholder="Name Ihres Unternehmens" class="form-input-professional">
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">E-Mail *</label>
-                            <input type="email" id="email" name="email" required placeholder="ihre@email.de">
+                        <div class="form-group form-group-professional">
+                            <label for="email" class="form-label-professional">E-Mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="ihre@email.de" class="form-input-professional">
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Telefon *</label>
-                            <input type="tel" id="phone" name="phone" required placeholder="+49 123 456789">
+                        <div class="form-group form-group-professional">
+                            <label for="phone" class="form-label-professional">Telefon *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+49 123 456789" class="form-input-professional">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Ihr Ziel (optional)</label>
-                        <textarea id="message" name="message" rows="3" placeholder="z.B. Mehr Kunden über Google finden, Online-Verkauf steigern..."></textarea>
+                    <div class="form-group form-group-professional">
+                        <label for="message" class="form-label-professional">Ihr Ziel (optional)</label>
+                        <textarea id="message" name="message" rows="3" placeholder="z.B. Mehr Kunden über Google finden, Online-Verkauf steigern..." class="form-input-professional"></textarea>
                     </div>
                     <div class="form-group form-checkbox">
                         <input type="checkbox" id="privacy" name="privacy" required>
@@ -904,7 +908,7 @@
                         <span class="guarantee-icon">🛡️</span>
                         <span class="guarantee-text">100% unverbindlich - keine Kosten, keine Verpflichtung</span>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-large btn-full">
+                    <button type="submit" class="btn btn-primary btn-large btn-full btn-professional btn-professional-primary">
                         <span>🎯 Jetzt kostenlose Analyse sichern</span>
                         <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
