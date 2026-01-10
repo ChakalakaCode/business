@@ -240,13 +240,17 @@
     background-position: -1px -1px;
 }
 
-/* ===== Enhanced Hero Section ===== */
+/* ===== Colorful Professional Backgrounds ===== */
+
+/* Hero with bild1.png */
 .hero-professional {
     position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #5b21b6 75%, #6d28d9 100%);
+    background: 
+        linear-gradient(135deg, rgba(91, 33, 182, 0.8) 0%, rgba(124, 58, 237, 0.6) 50%, rgba(139, 92, 246, 0.8) 100%),
+        url('bild1.png') center/cover;
     overflow: hidden;
 }
 
@@ -258,7 +262,7 @@
     right: 0;
     bottom: 0;
     background: var(--mesh-gradient);
-    opacity: 0.4;
+    opacity: 0.3;
     z-index: 1;
 }
 
@@ -271,6 +275,55 @@
     bottom: 0;
     background: var(--grid-pattern);
     z-index: 2;
+}
+
+/* Section with bild2.png */
+.section-professional {
+    position: relative;
+    padding: var(--space-24) 0;
+    overflow: hidden;
+    background: 
+        linear-gradient(135deg, rgba(8, 145, 178, 0.9) 0%, rgba(6, 182, 212, 0.8) 50%, rgba(34, 211, 238, 0.9) 100%),
+        url('bild2.png') center/cover;
+}
+
+.section-professional::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--mesh-gradient);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/* Alternating sections with different backgrounds */
+.section-professional:nth-child(even) {
+    background: 
+        linear-gradient(135deg, rgba(245, 158, 11, 0.9) 0%, rgba(251, 191, 36, 0.8) 50%, rgba(252, 211, 77, 0.9) 100%),
+        url('bild1.png') center/cover;
+}
+
+.section-professional:nth-child(odd) {
+    background: 
+        linear-gradient(135deg, rgba(16, 185, 129, 0.9) 0%, rgba(5, 150, 105, 0.8) 50%, rgba(4, 120, 87, 0.9) 100%),
+        url('bild2.png') center/cover;
+}
+
+/* Contact section special */
+.contact-section.section-professional {
+    background: 
+        linear-gradient(135deg, rgba(139, 92, 246, 0.95) 0%, rgba(109, 40, 217, 0.9) 25%, rgba(91, 33, 182, 0.95) 50%, rgba(124, 58, 237, 0.9) 75%, rgba(167, 139, 250, 0.95) 100%),
+        url('bild1.png') center/cover;
+}
+
+/* Trust section special */
+.trust-section.section-professional {
+    background: 
+        linear-gradient(135deg, rgba(6, 182, 212, 0.95) 0%, rgba(8, 145, 178, 0.9) 25%, rgba(14, 116, 144, 0.95) 50%, rgba(34, 211, 238, 0.9) 75%, rgba(224, 242, 254, 0.95) 100%),
+        url('bild2.png') center/cover;
 }
 
 .hero-professional .hero-content {
