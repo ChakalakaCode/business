@@ -246,7 +246,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: var(--gradient-hero);
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #4c1d95 50%, #5b21b6 75%, #6d28d9 100%);
     overflow: hidden;
 }
 
@@ -258,7 +258,7 @@
     right: 0;
     bottom: 0;
     background: var(--mesh-gradient);
-    opacity: 0.8;
+    opacity: 0.4;
     z-index: 1;
 }
 
@@ -344,10 +344,28 @@
 
 /* Enhanced Body Text */
 .text-professional {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     line-height: var(--leading-relaxed);
-    font-weight: var(--font-normal);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-weight: var(--font-medium);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: var(--text-lg);
+}
+
+/* Enhanced Hero Subtitle */
+.hero-subtitle.text-professional {
+    color: #ffffff;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(0, 0, 0, 0.4);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-xl);
+    max-width: 600px;
+}
+
+.hero-subtitle.text-professional strong {
+    color: #fbbf24;
+    font-weight: var(--font-bold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 /* ===== Professional Cards ===== */
