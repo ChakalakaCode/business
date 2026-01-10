@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://website-erstellen-lassen.tech/sitemap.xml
