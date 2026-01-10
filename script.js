@@ -169,11 +169,16 @@ if (contactForm) {
                 timestamp: new Date().toLocaleString('de-DE')
             };
             
+            console.log('Sende Email mit Parametern:', emailParams);
+            console.log('EmailJS Konfiguration:', EMAILJS_CONFIG);
+            
             const response = await emailjs.send(
                 EMAILJS_CONFIG.SERVICE_ID,
                 EMAILJS_CONFIG.TEMPLATE_ID,
                 emailParams
             );
+            
+            console.log('EmailJS Antwort:', response);
             
             if (response.status === 200) {
                 // Show success modal
@@ -199,12 +204,15 @@ if (contactForm) {
                 });
                 localStorage.setItem('contactRequests', JSON.stringify(requests));
                 
+                alert('Email erfolgreich gesendet! Sie erhalten eine Bestätigung an mutlu.arabul97@gmail.com');
+                
             } else {
-                throw new Error('Email konnte nicht gesendet werden');
+                throw new Error('Email konnte nicht gesendet werden. Status: ' + response.status);
             }
             
         } catch (error) {
             console.error('Fehler beim Email-Versand:', error);
+            alert('Fehler beim Email-Versand: ' + error.message + '\n\nDie Daten wurden lokal gespeichert. Bitte überprüfen Sie Ihre EmailJS-Konfiguration.');
             
             // Fallback: Nur lokal speichern wenn Email fehlschlägt
             const requests = JSON.parse(localStorage.getItem('contactRequests') || '[]');
