@@ -1,0 +1,114 @@
+Professionelles Email Template für EmailJS
+
+BETREFF:
+🚀 Neue Kontaktanfrage von {{from_name}} | WebPro Design
+
+HTML-INHALT (kopieren Sie dies in Ihr EmailJS Template):
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Professionelles Email Template</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4;">
+    
+    <!-- Header -->
+    <div style="background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 30px 0; text-align: center;">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <h1 style="color: white; font-size: 32px; margin: 0; font-weight: 700;">🚀 WebPro Design</h1>
+            <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 18px;">Neue Kontaktanfrage erhalten</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div style="max-width: 600px; margin: 40px auto; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;">
+        
+        <!-- Success Header -->
+        <div style="background: #10b981; padding: 20px; text-align: center;">
+            <div style="width: 60px; height: 60px; background: white; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px;">
+                ✅
+            </div>
+            <h2 style="color: white; margin: 0; font-size: 24px;">Anfrage erfolgreich!</h2>
+        </div>
+
+        <!-- Contact Details -->
+        <div style="padding: 40px;">
+            <h3 style="color: #1f2937; margin: 0 0 25px 0; font-size: 20px; border-bottom: 2px solid #6366f1; padding-bottom: 10px;">📋 Kundendaten</h3>
+            
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 15px 10px; font-weight: 600; color: #6b7280; width: 140px;">👤 Name:</td>
+                    <td style="padding: 15px 10px; color: #1f2937; font-weight: 500;">{{from_name}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 15px 10px; font-weight: 600; color: #6b7280;">🏢 Unternehmen:</td>
+                    <td style="padding: 15px 10px; color: #1f2937; font-weight: 500;">{{from_company}}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 15px 10px; font-weight: 600; color: #6b7280;">📧 E-Mail:</td>
+                    <td style="padding: 15px 10px; color: #1f2937;">
+                        <a href="mailto:{{from_email}}" style="color: #6366f1; text-decoration: none; font-weight: 500;">{{from_email}}</a>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                    <td style="padding: 15px 10px; font-weight: 600; color: #6b7280;">📱 Telefon:</td>
+                    <td style="padding: 15px 10px; color: #1f2937; font-weight: 500;">
+                        <a href="tel:{{from_phone}}" style="color: #6366f1; text-decoration: none; font-weight: 500;">{{from_phone}}</a>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Message Section -->
+            <div style="margin-top: 30px;">
+                <h3 style="color: #1f2937; margin: 0 0 15px 0; font-size: 20px; border-bottom: 2px solid #6366f1; padding-bottom: 10px;">💬 Nachricht</h3>
+                <div style="background: #f9fafb; border-left: 4px solid #6366f1; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <p style="margin: 0; color: #4b5563; line-height: 1.6; font-size: 16px;">{{message}}</p>
+                </div>
+            </div>
+
+            <!-- Timestamp -->
+            <div style="margin-top: 30px; padding: 15px; background: #f3f4f6; border-radius: 8px; text-align: center;">
+                <p style="margin: 0; color: #6b7280; font-size: 14px;">
+                    🕐 Gesendet am: {{timestamp}}
+                </p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="padding: 0 40px 40px;">
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <a href="mailto:{{from_email}}" style="display: inline-block; background: #6366f1; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center;">
+                    📧 Kunden antworten
+                </a>
+                <a href="tel:{{from_phone}}" style="display: inline-block; background: #10b981; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center;">
+                    📱 Kunden anrufen
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; padding: 30px 0; color: #6b7280;">
+        <p style="margin: 0 0 10px 0; font-size: 14px;">Diese Nachricht wurde automatisch über Ihr WebPro Design Kontaktformular gesendet.</p>
+        <p style="margin: 0; font-size: 12px; color: #9ca3af;">🚀 Professionelle Websites mit strategischer Google-Platzierung</p>
+    </div>
+
+</body>
+</html>
+
+EINRICHTUNG:
+1. Gehen Sie zu Ihrem EmailJS Dashboard
+2. Wählen Sie "Email Templates"
+3. Bearbeiten Sie Ihr bestehendes Template
+4. Fügen Sie den HTML-Code oben ein
+5. Betreff: 🚀 Neue Kontaktanfrage von {{from_name}} | WebPro Design
+6. Speichern Sie das Template
+
+FEATURES:
+✅ Professionelles Design mit Ihrem Branding
+✅ Responsive Layout für alle Geräte
+✅ Klickbare E-Mail und Telefon-Links
+✅ Strukturierte Datendarstellung
+✅ Zeitstempel Information
+✅ Action Buttons für schnelle Reaktion

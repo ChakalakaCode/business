@@ -399,6 +399,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initOrbBasePositions();
     
+    // Initialize Countdown Timer
+    initCountdownTimer();
+    
     // Initialize any additional features
     console.log('Website initialized successfully');
 });
+
+// ===== Countdown Timer =====
+function initCountdownTimer() {
+    const countdownElement = document.getElementById('countdown');
+    if (!countdownElement) return;
+
+    // Set end time to today midnight
+    const now = new Date();
+    const endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+    
+    function updateCountdown() {
+        const currentTime = new Date();
+        const timeLeft = endTime - currentTime;
+        
+        if (timeLeft <= 0) {
+            countdownElement.textContent = '00:00:00';
+            return;
+        }
+        
+        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        
+        countdownElement.textContent = 
+            String(hours).padStart(2, '0') + ':' +
+            String(minutes).padStart(2, '0') + ':' +
+            String(seconds).padStart(2, '0');
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    
+    // Simulate decreasing available spots
+    setTimeout(() => {
+        const spotsText = document.querySelector('.spots-text');
+        if (spotsText && spotsText.textContent.includes('2')) {
+            spotsText.innerHTML = 'Noch <strong>1</strong> kostenlose Analyse verfügbar';
+            const spotsFilled = document.querySelector('.spots-filled');
+            if (spotsFilled) {
+                spotsFilled.style.width = '66%';
+            }
+        }
+    }, 30000); // After 30 seconds
+}
