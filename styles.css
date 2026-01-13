@@ -2001,11 +2001,9 @@ section {
     }
 }
 
+/* Step Container */
 .configurator-container {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 48px;
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
