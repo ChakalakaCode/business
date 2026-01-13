@@ -366,7 +366,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 200px 24px 80px;
+    padding: 120px 24px 80px;
     overflow: hidden;
 }
 
@@ -1893,19 +1893,27 @@ section {
 /* ===== Footer ===== */
 .footer {
     background: var(--dark);
-    padding: 64px 0 32px;
+    padding: 48px 0 24px;
     color: var(--gray-400);
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
+    gap: 32px;
+    margin-bottom: 32px;
 }
 
 .footer-brand .logo {
     margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-brand .logo-image {
+    width: 140px;
+    height: 70px;
+    object-fit: contain;
 }
 
 .footer-brand .logo-text {
@@ -1913,26 +1921,29 @@ section {
 }
 
 .footer-brand p {
-    font-size: 0.9375rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
 .footer-links h4,
 .footer-contact h4 {
     color: var(--white);
-    font-size: 1rem;
-    margin-bottom: 20px;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    font-weight: 600;
 }
 
 .footer-links ul {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .footer-links a {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     transition: color var(--transition);
+    padding: 4px 0;
 }
 
 .footer-links a:hover {
@@ -1940,15 +1951,17 @@ section {
 }
 
 .footer-contact p {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     margin-bottom: 8px;
+    line-height: 1.5;
 }
 
 .footer-bottom {
-    padding-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--gray-800);
     text-align: center;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    padding-bottom: 16px;
 }
 
 /* ===== Modal ===== */
@@ -2069,6 +2082,7 @@ section {
         flex-direction: column;
         text-align: center;
         padding-top: 100px;
+        min-height: auto;
     }
     
     .hero-content {
@@ -2119,6 +2133,39 @@ section {
     
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .footer {
+        padding: 32px 0 20px;
+    }
+    
+    .footer-brand .logo-image {
+        width: 120px;
+        height: 60px;
+    }
+    
+    .footer-brand p {
+        font-size: 0.85rem;
+    }
+    
+    .footer-links h4,
+    .footer-contact h4 {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+        font-size: 0.8rem;
+    }
+    
+    .footer-contact p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-bottom {
+        font-size: 0.75rem;
+        padding-top: 20px;
     }
 }
 
@@ -2164,8 +2211,10 @@ section {
     
     .hero {
         padding: 80px 16px 48px;
-        margin-top: 60px;
+        margin-top: 0;
         min-height: auto;
+        align-items: flex-start;
+        padding-top: 80px;
     }
     
     .hero-title {
@@ -2305,7 +2354,59 @@ section {
     
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer {
+        padding: 24px 0 16px;
+    }
+    
+    .footer-brand {
+        text-align: center;
+    }
+    
+    .footer-brand .logo {
+        justify-content: center;
+        margin-bottom: 12px;
+    }
+    
+    .footer-brand .logo-image {
+        width: 100px;
+        height: 50px;
+    }
+    
+    .footer-brand p {
+        font-size: 0.8rem;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .footer-links h4,
+    .footer-contact h4 {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    
+    .footer-links ul {
+        align-items: center;
+    }
+    
+    .footer-links a {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+    
+    .footer-contact p {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        font-size: 0.7rem;
+        padding-top: 16px;
+        padding-bottom: 12px;
     }
     
     .scroll-indicator {
@@ -2348,8 +2449,10 @@ section {
     
     .hero {
         padding: 70px 12px 40px;
-        margin-top: 56px;
+        margin-top: 0;
         min-height: auto;
+        align-items: flex-start;
+        padding-top: 70px;
     }
     
     .hero-title {
