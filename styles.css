@@ -63,7 +63,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 90px;
 }
 
 body {
@@ -268,6 +268,7 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
     backdrop-filter: blur(12px);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all var(--transition-slow);
+    min-height: 70px;
 }
 
 .navbar.scrolled {
@@ -301,10 +302,11 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 }
 
 .logo-image {
-    width: 360px;
-    height: 180px;
+    width: 180px;
+    height: 90px;
     object-fit: cover;
     object-position: center;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .nav-menu {
@@ -2122,22 +2124,112 @@ section {
 
 @media (max-width: 768px) {
     section {
-        padding: 64px 0;
+        padding: 48px 0;
+    }
+    
+    html {
+        scroll-padding-top: 80px;
+    }
+    
+    .logo-image {
+        width: 140px;
+        height: 70px;
+    }
+    
+    .nav-container {
+        padding: 0 16px;
+    }
+    
+    .navbar {
+        min-height: 60px;
+        padding: 12px 0;
     }
     
     .nav-menu {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 80%;
-        max-width: 300px;
+        width: 70%;
+        max-width: 280px;
         height: 100vh;
         background: var(--white);
         flex-direction: column;
         align-items: stretch;
-        padding: 80px 24px 24px;
+        padding: 80px 20px 24px;
         box-shadow: var(--shadow-2xl);
         transition: right var(--transition-slow);
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    .hero {
+        padding: 80px 16px 48px;
+        margin-top: 60px;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        line-height: 1.1;
+        margin-bottom: 20px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+    
+    .hero-visual {
+        display: none;
+    }
+    
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        margin-bottom: 16px;
+    }
+    
+    .section-header {
+        margin-bottom: 40px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .details-card,
+    .solution-card {
+        padding: 24px;
+        padding-top: 60px;
+    }
+    
+    .details-icon-wrap,
+    .solution-icon-wrap {
+        top: 16px;
+        left: 24px;
+        width: 48px;
+        height: 48px;
+    }
+    
+    .details-icon,
+    .solution-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+    
+    .details-badge {
+        top: 16px;
+        right: 16px;
+        padding: 4px 10px;
+        font-size: 10px;
     }
     
     .nav-menu.active {
@@ -2223,11 +2315,116 @@ section {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 16px;
+        padding: 0 12px;
+    }
+    
+    html {
+        scroll-padding-top: 70px;
+    }
+    
+    .logo-image {
+        width: 120px;
+        height: 60px;
+    }
+    
+    .nav-container {
+        padding: 0 12px;
+    }
+    
+    .navbar {
+        min-height: 56px;
+        padding: 10px 0;
+    }
+    
+    .nav-menu {
+        width: 75%;
+        max-width: 260px;
+        padding: 80px 16px 24px;
+    }
+    
+    section {
+        padding: 40px 0;
     }
     
     .hero {
-        padding: 80px 16px 48px;
+        padding: 70px 12px 40px;
+        margin-top: 56px;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.75rem, 10vw, 2.5rem);
+        line-height: 1.05;
+        margin-bottom: 16px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        margin-bottom: 12px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+    
+    .section-header {
+        margin-bottom: 32px;
+    }
+    
+    .section-title {
+        font-size: clamp(1.25rem, 6vw, 1.75rem);
+        margin-bottom: 8px;
+    }
+    
+    .section-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .details-card,
+    .solution-card {
+        padding: 20px;
+        padding-top: 50px;
+    }
+    
+    .details-icon-wrap,
+    .solution-icon-wrap {
+        top: 12px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .details-icon,
+    .solution-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .details-badge {
+        top: 12px;
+        right: 12px;
+        padding: 3px 8px;
+        font-size: 9px;
+    }
+    
+    .details-price {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .details-price strong {
+        font-size: 24px;
     }
     
     .btn-large {
