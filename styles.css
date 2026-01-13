@@ -302,9 +302,9 @@ h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
 }
 
 .logo-image {
-    width: 180px;
-    height: 90px;
-    object-fit: cover;
+    width: 140px;
+    height: 70px;
+    object-fit: contain;
     object-position: center;
     transition: width 0.3s ease, height 0.3s ease;
 }
@@ -2179,8 +2179,8 @@ section {
     }
     
     .logo-image {
-        width: 140px;
-        height: 70px;
+        width: 120px;
+        height: 60px;
     }
     
     .nav-container {
@@ -2424,8 +2424,8 @@ section {
     }
     
     .logo-image {
-        width: 120px;
-        height: 60px;
+        width: 100px;
+        height: 50px;
     }
     
     .nav-container {
