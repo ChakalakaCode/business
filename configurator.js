@@ -18,6 +18,7 @@ class WebsiteConfigurator {
         this.bindEvents();
         this.updateSummary();
         this.updatePrices();
+        this.initContactForm();
     }
 
     bindEvents() {
@@ -31,6 +32,15 @@ class WebsiteConfigurator {
         // Reset button
         document.getElementById('reset-config')?.addEventListener('click', () => {
             this.resetConfiguration();
+        });
+
+        // Contact form events
+        document.getElementById('back-to-config')?.addEventListener('click', () => {
+            this.showConfigurator();
+        });
+
+        document.getElementById('configurator-form')?.addEventListener('submit', (e) => {
+            this.handleFormSubmit(e);
         });
 
         // Add to navigation
@@ -213,6 +223,180 @@ class WebsiteConfigurator {
                 navMenu.appendChild(configuratorLink);
             }
         }
+    }
+
+    // Contact Form Methods
+    initContactForm() {
+        // Update summary button in configurator
+        const summaryActions = document.querySelector('.summary-actions');
+        if (summaryActions) {
+            const requestBtn = summaryActions.querySelector('.btn-primary');
+            if (requestBtn) {
+                requestBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showContactForm();
+                });
+            }
+        }
+    }
+
+    showContactForm() {
+        // Hide configurator
+        const configuratorSection = document.getElementById('konfigurator');
+        const contactSection = document.getElementById('konfigurator-kontakt');
+        
+        if (configuratorSection && contactSection) {
+            // Add fade out animation
+            configuratorSection.style.opacity = '0';
+            configuratorSection.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                configuratorSection.style.display = 'none';
+                contactSection.style.display = 'block';
+                
+                // Update form with configuration data
+                this.updateContactForm();
+                
+                // Fade in contact form
+                setTimeout(() => {
+                    contactSection.style.opacity = '1';
+                    contactSection.style.transform = 'scale(1)';
+                    
+                    // Scroll to contact form
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }, 300);
+        }
+    }
+
+    showConfigurator() {
+        // Show configurator
+        const configuratorSection = document.getElementById('konfigurator');
+        const contactSection = document.getElementById('konfigurator-kontakt');
+        
+        if (configuratorSection && contactSection) {
+            contactSection.style.opacity = '0';
+            contactSection.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                contactSection.style.display = 'none';
+                configuratorSection.style.display = 'block';
+                
+                setTimeout(() => {
+                    configuratorSection.style.opacity = '1';
+                    configuratorSection.style.transform = 'scale(1)';
+                    
+                    // Scroll to configurator
+                    configuratorSection.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }, 300);
+        }
+    }
+
+    updateContactForm() {
+        // Update configuration summary in form
+        const summaryList = document.getElementById('config-summary-list');
+        const priceOnetimeForm = document.getElementById('price-onetime-form');
+        const priceMonthlyForm = document.getElementById('price-monthly-form');
+        const configDataHidden = document.getElementById('config-data');
+        
+        if (summaryList) {
+            let summaryHTML = '';
+            
+            // Add base package
+            summaryHTML += `
+                <div class="config-summary-item">
+                    <span>Basis-Paket (${this.selectedOptions.type.label})</span>
+                    <span>${this.basePrice}€</span>
+                </div>
+            `;
+            
+            // Add selected options
+            Object.keys(this.selectedOptions).forEach(category => {
+                if (category === 'features') {
+                    this.selectedOptions.features.forEach(feature => {
+                        if (feature.price > 0) {
+                            summaryHTML += `
+                                <div class="config-summary-item">
+                                    <span>${feature.label}</span>
+                                    <span>+${feature.price}€</span>
+                                </div>
+                            `;
+                        }
+                    });
+                } else if (this.selectedOptions[category].price > 0) {
+                    const option = this.selectedOptions[category];
+                    summaryHTML += `
+                        <div class="config-summary-item">
+                            <span>${option.label}</span>
+                            <span>+${option.price}€</span>
+                        </div>
+                    `;
+                }
+            });
+            
+            summaryList.innerHTML = summaryHTML;
+        }
+        
+        // Update prices
+        if (priceOnetimeForm && this.currentPrices) {
+            priceOnetimeForm.textContent = `${this.currentPrices.onetime.toLocaleString('de-DE')}€`;
+        }
+        
+        if (priceMonthlyForm && this.currentPrices) {
+            priceMonthlyForm.textContent = `${this.currentPrices.monthly.toFixed(2).replace('.', ',')}€`;
+        }
+        
+        // Store configuration data in hidden field
+        if (configDataHidden) {
+            configDataHidden.value = JSON.stringify(this.getConfiguration());
+        }
+    }
+
+    handleFormSubmit(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const configData = JSON.parse(formData.get('config-data') || '{}');
+        
+        // Show success animation
+        this.showSuccessAnimation(formData, configData);
+        
+        // Here you would normally send the data to your server
+        console.log('Form submitted:', {
+            formData: Object.fromEntries(formData),
+            configuration: configData
+        });
+    }
+
+    showSuccessAnimation(formData, configData) {
+        // Create success modal
+        const successModal = document.createElement('div');
+        successModal.className = 'configurator-success active';
+        successModal.innerHTML = `
+            <div class="success-icon">🎉</div>
+            <h3>Vielen Dank für Ihre Anfrage!</h3>
+            <p>Wir haben Ihre Konfiguration erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+            <p><strong>Gesamtkosten:</strong> ${configData.prices?.onetime || 0}€ einmalig + ${configData.prices?.monthly || 0}€/monatlich</p>
+            <button class="btn btn-primary" onclick="this.closest('.configurator-success').remove()">
+                Alles klar
+            </button>
+        `;
+        
+        document.body.appendChild(successModal);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (successModal.parentNode) {
+                successModal.remove();
+            }
+        }, 5000);
+        
+        // Reset form after delay
+        setTimeout(() => {
+            e.target.reset();
+            this.showConfigurator();
+        }, 2000);
     }
 
     // Get current configuration for form submission

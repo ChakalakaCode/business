@@ -1968,6 +1968,37 @@ section {
 .configurator-section {
     background: linear-gradient(180deg, var(--gray-50) 0%, var(--white) 100%);
     padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.configurator-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    animation: configuratorShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes configuratorShift {
+    0% { 
+        transform: scale(1) rotate(0deg); 
+        opacity: 0.5;
+    }
+    50% { 
+        transform: scale(1.1) rotate(2deg); 
+        opacity: 0.7;
+    }
+    100% { 
+        transform: scale(1.05) rotate(-1deg); 
+        opacity: 0.6;
+    }
 }
 
 .configurator-container {
@@ -1976,6 +2007,8 @@ section {
     gap: 48px;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .configurator-main {
@@ -1991,11 +2024,55 @@ section {
     border: 1px solid rgba(99, 102, 241, 0.08);
     box-shadow: var(--shadow-soft), 0 0 0 1px rgba(255, 255, 255, 0.6);
     transition: all var(--transition-slow);
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    animation: configGroupSlideIn 0.8s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.config-group::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
+    border-radius: var(--radius-2xl);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.config-group:nth-child(1) { animation-delay: 0.1s; }
+.config-group:nth-child(2) { animation-delay: 0.2s; }
+.config-group:nth-child(3) { animation-delay: 0.3s; }
+.config-group:nth-child(4) { animation-delay: 0.4s; }
+.config-group:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes configGroupSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 .config-group:hover {
     box-shadow: var(--shadow-md), 0 0 0 1px rgba(99, 102, 241, 0.12);
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.02);
+}
+
+.config-group:hover::before {
+    opacity: 0.3;
 }
 
 .config-title {
@@ -2006,6 +2083,7 @@ section {
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 24px;
+    position: relative;
 }
 
 .config-icon {
@@ -2013,6 +2091,12 @@ section {
     height: 24px;
     color: var(--primary);
     flex-shrink: 0;
+    animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .config-options {
@@ -2028,19 +2112,35 @@ section {
     transition: all var(--transition);
     position: relative;
     background: var(--white);
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: optionSlideIn 0.5s ease forwards;
+}
+
+.config-option:nth-child(1) { animation-delay: 0.1s; }
+.config-option:nth-child(2) { animation-delay: 0.2s; }
+.config-option:nth-child(3) { animation-delay: 0.3s; }
+.config-option:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes optionSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .config-option:hover {
     border-color: var(--primary-light);
     background: rgba(99, 102, 241, 0.02);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(99, 102, 241, 0.15);
 }
 
 .config-option.selected {
     border-color: var(--primary);
-    background: rgba(99, 102, 241, 0.05);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), var(--shadow-lg);
+    transform: scale(1.02);
 }
 
 .config-option.selected::before {
@@ -2048,23 +2148,33 @@ section {
     position: absolute;
     top: 12px;
     right: 12px;
-    width: 24px;
-    height: 24px;
-    background: var(--primary);
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: var(--white);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
-    animation: checkPop 0.3s ease;
+    animation: checkPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 @keyframes checkPop {
-    0% { transform: scale(0) rotate(-10deg); }
-    60% { transform: scale(1.2) rotate(5deg); }
-    100% { transform: scale(1) rotate(0); }
+    0% { 
+        transform: scale(0) rotate(-180deg); 
+        opacity: 0;
+    }
+    60% { 
+        transform: scale(1.3) rotate(10deg); 
+        opacity: 1;
+    }
+    100% { 
+        transform: scale(1) rotate(0deg); 
+        opacity: 1;
+    }
 }
 
 .option-header {
@@ -2079,15 +2189,28 @@ section {
     font-weight: 600;
     color: var(--dark);
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+.config-option:hover .option-header h4 {
+    color: var(--primary);
 }
 
 .option-price {
     font-size: 0.875rem;
     font-weight: 700;
     color: var(--primary);
-    background: rgba(99, 102, 241, 0.1);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
     padding: 4px 12px;
     border-radius: var(--radius-full);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+}
+
+.config-option:hover .option-price {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    transform: scale(1.05);
 }
 
 .config-option p {
@@ -2095,6 +2218,11 @@ section {
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;
+    transition: color 0.3s ease;
+}
+
+.config-option:hover p {
+    color: var(--gray-700);
 }
 
 .checkbox-option {
@@ -2113,12 +2241,14 @@ section {
     border: 2px solid var(--gray-300);
     border-radius: var(--radius);
     background: var(--white);
-    transition: all var(--transition);
+    transition: all 0.3s ease;
 }
 
 .checkbox-option.selected::before {
     border-color: var(--primary);
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
 
 .checkbox-option.selected::after {
@@ -2130,6 +2260,13 @@ section {
     color: var(--white);
     font-size: 12px;
     font-weight: 700;
+    animation: checkboxCheck 0.3s ease;
+}
+
+@keyframes checkboxCheck {
+    0% { transform: translateY(-50%) scale(0); }
+    50% { transform: translateY(-50%) scale(1.2); }
+    100% { transform: translateY(-50%) scale(1); }
 }
 
 /* Summary Card */
@@ -2147,6 +2284,16 @@ section {
     box-shadow: var(--shadow-2xl), 0 0 0 1px rgba(255, 255, 255, 0.6);
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+    animation: summarySlideIn 1s ease 0.6s forwards;
+}
+
+@keyframes summarySlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
 }
 
 .summary-card::before {
@@ -2157,6 +2304,12 @@ section {
     right: 0;
     height: 4px;
     background: linear-gradient(90deg, var(--primary), var(--secondary));
+    animation: gradientFlow 3s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 .summary-card h3 {
@@ -2164,6 +2317,18 @@ section {
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 24px;
+    position: relative;
+}
+
+.summary-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: var(--radius);
 }
 
 .summary-items {
@@ -2180,11 +2345,18 @@ section {
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background: var(--gray-50);
+    background: linear-gradient(135deg, var(--gray-50) 0%, rgba(99, 102, 241, 0.02) 100%);
     border-radius: var(--radius);
     font-size: 0.9rem;
     color: var(--gray-700);
     animation: slideIn 0.3s ease;
+    border: 1px solid rgba(99, 102, 241, 0.05);
+    transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+    transform: translateX(4px);
 }
 
 @keyframes slideIn {
@@ -2201,6 +2373,10 @@ section {
 .summary-item span:last-child {
     font-weight: 600;
     color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .price-summary {
@@ -2208,6 +2384,23 @@ section {
     border-bottom: 1px solid var(--gray-200);
     padding: 20px 0;
     margin-bottom: 24px;
+    position: relative;
+}
+
+.price-summary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    animation: shimmer 2s ease infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 
 .price-row {
@@ -2215,6 +2408,11 @@ section {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    transition: transform 0.3s ease;
+}
+
+.price-row:hover {
+    transform: translateX(4px);
 }
 
 .price-row:last-child {
@@ -2230,12 +2428,20 @@ section {
     font-size: 1.25rem;
     font-weight: 800;
     color: var(--dark);
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .price-monthly {
     font-size: 1.125rem;
     font-weight: 700;
     color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .summary-features {
@@ -2261,12 +2467,79 @@ section {
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: transform 0.3s ease;
+}
+
+.summary-features li:hover {
+    transform: translateX(4px);
+    color: var(--primary);
 }
 
 .summary-actions {
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.summary-actions .btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.summary-actions .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.summary-actions .btn:hover::before {
+    left: 100%;
+}
+
+/* Konfigurator Success Animation */
+.configurator-success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    padding: 40px;
+    box-shadow: var(--shadow-2xl);
+    z-index: 3000;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.configurator-success.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.configurator-success .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 40px;
+    color: var(--white);
+    animation: successPulse 1s ease infinite;
+}
+
+@keyframes successPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 /* Responsive Konfigurator */
@@ -2372,6 +2645,453 @@ section {
     
     .price-monthly {
         font-size: 1rem;
+    }
+}
+
+/* ===== Konfigurator Kontaktformular ===== */
+.configurator-contact-section {
+    background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.configurator-contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(14, 165, 233, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.configurator-contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form-wrapper {
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: contactFormSlideIn 0.8s ease forwards;
+}
+
+@keyframes contactFormSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.configurator-form {
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    padding: 40px;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow: var(--shadow-2xl), 0 0 0 1px rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.configurator-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    animation: gradientFlow 3s ease infinite;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    transition: all var(--transition);
+    background: var(--white);
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--gray-400);
+}
+
+.config-summary-form {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(14, 165, 233, 0.03) 100%);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    margin: 32px 0;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.config-summary-form h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.config-summary-form h4::before {
+    content: '📋';
+    font-size: 1.2rem;
+}
+
+.config-summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.config-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--white);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    border: 1px solid rgba(99, 102, 241, 0.05);
+    transition: all 0.3s ease;
+}
+
+.config-summary-item:hover {
+    transform: translateX(4px);
+    background: rgba(99, 102, 241, 0.02);
+}
+
+.config-summary-item span:last-child {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.config-pricing-form {
+    border-top: 1px solid rgba(99, 102, 241, 0.1);
+    padding-top: 16px;
+}
+
+.price-row-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.price-row-form:last-child {
+    margin-bottom: 0;
+}
+
+.price-onetime-form,
+.price-monthly-form {
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.form-checkbox input {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.form-checkbox label {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: 0;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.form-checkbox a {
+    color: var(--primary);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.form-checkbox a:hover {
+    color: var(--secondary);
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.form-actions .btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.form-actions .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.form-actions .btn:hover::before {
+    left: 100%;
+}
+
+/* Contact Visual */
+.contact-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-animation {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: successVisualSlideIn 1s ease 0.3s forwards;
+}
+
+@keyframes successVisualSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-circle {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    position: relative;
+    animation: successCirclePulse 2s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+}
+
+@keyframes successCirclePulse {
+    0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+    }
+    50% { 
+        transform: scale(1.05); 
+        box-shadow: 0 12px 48px rgba(99, 102, 241, 0.4);
+    }
+}
+
+.success-icon {
+    font-size: 48px;
+    animation: successIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes successIconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.success-animation h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.success-animation p {
+    font-size: 1.1rem;
+    color: var(--gray-600);
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.benefits-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
+.benefit-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    background: rgba(99, 102, 241, 0.02);
+}
+
+.benefit-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* Responsive Konfigurator Kontaktformular */
+@media (max-width: 1024px) {
+    .configurator-contact-container {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    
+    .contact-visual {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .configurator-contact-section {
+        padding: 48px 0;
+    }
+    
+    .configurator-form {
+        padding: 24px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .config-summary-form {
+        padding: 20px;
+        margin: 24px 0;
+    }
+    
+    .benefits-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .success-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .success-icon {
+        font-size: 40px;
+    }
+    
+    .success-animation h3 {
+        font-size: 1.3rem;
+    }
+    
+    .success-animation p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .configurator-contact-section {
+        padding: 32px 0;
+    }
+    
+    .configurator-form {
+        padding: 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 14px;
+    }
+    
+    .config-summary-form {
+        padding: 16px;
+        margin: 20px 0;
+    }
+    
+    .success-circle {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .success-icon {
+        font-size: 32px;
+    }
+    
+    .success-animation h3 {
+        font-size: 1.2rem;
+    }
+    
+    .benefit-item {
+        padding: 12px;
+        font-size: 0.85rem;
     }
 }
 

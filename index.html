@@ -921,6 +921,124 @@
         </div>
     </section>
 
+    <!-- Konfigurator Kontaktformular Section -->
+    <section class="configurator-contact-section" id="konfigurator-kontakt" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fast geschafft!</span>
+                <h2 class="section-title">Ihre persönliche Website</h2>
+                <p class="section-subtitle">Geben Sie uns Ihre Kontaktdaten und wir melden uns mit Ihrem individuellen Angebot</p>
+            </div>
+            
+            <div class="configurator-contact-container">
+                <div class="contact-form-wrapper">
+                    <form class="configurator-form" id="configurator-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="config-name">Ihr Name *</label>
+                                <input type="text" id="config-name" name="name" required placeholder="Max Mustermann">
+                            </div>
+                            <div class="form-group">
+                                <label for="config-company">Unternehmen</label>
+                                <input type="text" id="config-company" name="company" placeholder="Ihre Firma GmbH">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="config-email">E-Mail *</label>
+                                <input type="email" id="config-email" name="email" required placeholder="max@beispiel.de">
+                            </div>
+                            <div class="form-group">
+                                <label for="config-phone">Telefon *</label>
+                                <input type="tel" id="config-phone" name="phone" required placeholder="+49 123 456789">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="config-message">Ihre Wünsche (optional)</label>
+                            <textarea id="config-message" name="message" rows="4" placeholder="Besondere Wünsche oder Fragen zu Ihrer Website..."></textarea>
+                        </div>
+                        
+                        <!-- Konfigurationsübersicht -->
+                        <div class="config-summary-form">
+                            <h4>Ihre Konfiguration</h4>
+                            <div class="config-summary-list" id="config-summary-list">
+                                <!-- Wird von JavaScript gefüllt -->
+                            </div>
+                            <div class="config-pricing-form">
+                                <div class="price-row-form">
+                                    <span>Einmalige Kosten:</span>
+                                    <span class="price-onetime-form" id="price-onetime-form">499€</span>
+                                </div>
+                                <div class="price-row-form">
+                                    <span>Monatliche Kosten:</span>
+                                    <span class="price-monthly-form" id="price-monthly-form">29,95€</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="config-privacy" name="privacy" required>
+                            <label for="config-privacy">
+                                Ich stimme der <a href="datenschutz.html">Datenschutzerklärung</a> und den <a href="agb.html">AGB</a> zu *
+                            </label>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="config-callback" name="callback" checked>
+                            <label for="config-callback">
+                                Ich möchte einen Rückruf zur Besprechung meiner Konfiguration
+                            </label>
+                        </div>
+                        
+                        <input type="hidden" id="config-data" name="config-data">
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <span>🎯 Konfiguration anfordern</span>
+                                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="back-to-config">
+                                <span>⬅️ Zurück zum Konfigurator</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="contact-visual">
+                    <div class="success-animation">
+                        <div class="success-circle">
+                            <div class="success-icon">🚀</div>
+                        </div>
+                        <h3>Ihre Website ist fast fertig!</h3>
+                        <p>Nach Ihrer Anfrage erstellen wir ein persönliches Angebot und melden uns innerhalb von 24 Stunden.</p>
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">⚡</span>
+                                <span>Schnelle Umsetzung</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🎨</span>
+                                <span>Individuelles Design</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">📈</span>
+                                <span>SEO-Optimiert</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">🔧</span>
+                                <span>Technischer Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Process Section -->
     <section class="process-section section-professional" id="prozess">
         <div class="container">
